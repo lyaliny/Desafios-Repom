@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <h2>JavaScript Arrays</h2>
+
+    <strong>idades: </strong>
+    <p id="idades"></p>
+    <strong>idades quantidade: </strong>
+    <p id="idadesTamanho"></p>
+    <strong>terceira idade na lista: </strong>
+    <p id="idadesTerceira"></p>
+    <strong>idades somando + 10 em cada uma: </strong>
+    <p id="idadesPlus"></p>
+    <strong>idades menores que 40: </strong>
+    <p id="idadesMenor40"></p>
+
+    <script>
+      const idades = [20, 30, 40, 60, 90, 100];
+
+      document.getElementById("idades").innerHTML = idades.join(", ");
+
+      document.getElementById("idadesTamanho").innerHTML = idades.length;
+      document.getElementById("idadesTerceira").innerHTML = idades[2];
+
+      function somaItens(listaIdades) {
+        let soma = 10;
+        for (let x = 0; x < listaIdades.length; x++) {
+          listaIdades[x] += soma;
+        }
+        return listaIdades.join(", ");
+      }
+
+      document.getElementById("idadesPlus").innerHTML = somaItens([...idades]);
+
+      function menorIdade(listaIdades) {
+        let menor = [];
+        for (let x = 0; x < listaIdades.length; x++) {
+          if (listaIdades[x] < 40) {
+            menor.push(listaIdades[x]);
+          }
+        }
+        return menor.join(", ");
+      }
+
+      document.getElementById("idadesMenor40").innerHTML = menorIdade([
+        ...idades,
+      ]);
+    </script>
+  </body>
+</html>
