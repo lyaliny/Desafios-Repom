@@ -83,73 +83,17 @@
         </div>
       </div>
     </div>
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      id="exampleModal"
-      tabindex="-1"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Editar Dados</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <div class="col-sm-6 col-md-12 mt-3">
-              <input
-                class="form-control"
-                placeholder="Insira o nome"
-                type="text"
-                id="nomeModal"
-              />
-            </div>
-            <div class="col-sm-6 col-md-12 mt-3">
-              <input
-                class="form-control"
-                type="number"
-                id="idadeModal"
-                placeholder="Insira sua idade"
-              />
-            </div>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-              id="sair"
-            >
-              Sair
-            </button>
-            <button
-              onclick="editarModal()"
-              type="button"
-              class="btn btn-primary"
-            >
-              Salvar alterações
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
   </body>
   <script>
     let nome = document.getElementById("nome"); // executa qdo a tela carrega, inicia vazio
     let idade = document.getElementById("idade");
-    let nomeModal = document.getElementById("nomeModal");
-    let idadeModal = document.getElementById("idadeModal");
+    let nomeEdicao = document.getElementById("nomeEdicao");
+    let idadeEdicao = document.getElementById("idadeEdicao");
+
     let nomes = [
-      { nome: "João", idade: 40 },
-      { nome: "Maria", idade: 55 },
-      { nome: "Carlos", idade: 24 },
+      { nome: "João", idade: 40, posicao: false },
+      { nome: "Maria", idade: 55, posicao: false },
+      { nome: "Carlos", idade: 24, posicao: false },
     ]; //não pode estar vazio dentro da função, senãos sempre irá limpar
     let lista = document.getElementById("lista");
     let posicao = "";
@@ -180,31 +124,29 @@
       renderizarTabela();
     }
 
-    function carregarModal(x) {
-      posicao = x;
-      nomeModal.value = nomes[posicao].nome;
-      idadeModal.value = nomes[posicao].idade;
+    function cancelar() {
+      return false;
     }
-    function editarModal() {
-      debugger;
-      if (nomeModal.value && idadeModal.value) {
-        nomes[posicao].nome = nomeModal.value;
-        nomes[posicao].idade = idadeModal.value;
-        renderizarTabela();
-      } else {
-        alert("Preencha todos os campos!");
-      }
-      document.getElementById("sair").click();
+
+    function habilitarEdicao(x) {
+      nomeEdicao = getElementById("nomeEdicao")
+      idadeEdicao = getElementById("idadeEdicao")
+
+    }
+    function editarPessoa() {
+      document.getElementById("nomeEdicao") = nomes[x].nome.value
+      document.getElementById("idadeEdicao") = nomes[x].idade
     }
 
     function renderizarTabela() {
       let arr = "";
       for (let x = 0; x < nomes.length; x++) {
-        arr += `<tr>
+        if (posicao == false) {
+          arr += `<tr>
               <td>${nomes[x].nome}</td>
               <td>${nomes[x].idade}</td>
               <td>
-                <button type="button" onclick="carregarModal(${x})" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" onclick="habilitarEdicao(${x})" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
                   Editar
                 </button>
                 <button class="btn btn-danger" type="button" onclick="excluir(${x})">
@@ -212,6 +154,30 @@
                 </button>
               </td>
             </tr>`;
+        } else {
+          arr += `<tr>
+              <td><input
+            class="form-control"
+            placeholder="Insira o nome"
+            type="text"
+            id="nomeEdicao"
+          /></td>
+              <td><input
+            class="form-control"
+            type="number"
+            id="idadeEdicao"
+            placeholder="Insira sua idade"
+          /></td>
+              <td>
+                <button type="button" onclick="habilitarEdicao(${x})" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                  Salvar
+                </button>
+                <button class="btn btn-black" type="button" onclick="cancelar(${x})">
+                Cancelar
+                </button>
+              </td>
+            </tr>`;
+        }
       }
       document.getElementById("lista").innerHTML = arr;
     }
