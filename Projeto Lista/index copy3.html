@@ -96,7 +96,7 @@
       { nome: "Carlos", idade: 24, posicao: false },
     ]; //não pode estar vazio dentro da função, senãos sempre irá limpar
     let lista = document.getElementById("lista");
-    let posicao = "";
+    let posicao = false;
 
     function inserirNome() {
       debugger;
@@ -129,13 +129,14 @@
     }
 
     function habilitarEdicao(x) {
-      nomeEdicao = getElementById("nomeEdicao")
-      idadeEdicao = getElementById("idadeEdicao")
+      posicao = true;
+      getElementById("nomeEdicao") = nomes[x].nome;
+      getElementById("idadeEdicao") = nomes[x].idade;
 
     }
     function editarPessoa() {
-      document.getElementById("nomeEdicao") = nomes[x].nome.value
-      document.getElementById("idadeEdicao") = nomes[x].idade
+      nomes[x].nome = document.getElementById("nomeEdicao");
+      nomes[x].idade = document.getElementById("idadeEdicao");
     }
 
     function renderizarTabela() {
@@ -169,7 +170,7 @@
             placeholder="Insira sua idade"
           /></td>
               <td>
-                <button type="button" onclick="habilitarEdicao(${x})" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <button type="button" onclick="editarPessoa(${x})" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">
                   Salvar
                 </button>
                 <button class="btn btn-black" type="button" onclick="cancelar(${x})">
