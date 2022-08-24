@@ -1,0 +1,27 @@
+.background {
+  background-image: url(./img/caminhoes.png);
+  background-size: cover;
+  background-position: center bottom;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+.colunas {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+.text {
+  color: rgb(249, 249, 101);
+  font-weight: 800;
+  font-family: "Poppins", sans-serif;
+  width: 100%;
+  text-align: center;
+}
+.text-p {
+  color: white;
+  font-weight: 200;
+  font-family: "Poppins", sans-serif;
+  font-size: small;
+  text-align: center;
+}

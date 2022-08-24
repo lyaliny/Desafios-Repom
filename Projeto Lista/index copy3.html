@@ -65,9 +65,9 @@
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Nome</th>
-              <th scope="col">Idade</th>
-              <th scope="col">Ações</th>
+              <th>Nome</th>
+              <th>Idade</th>
+              <th>Ações</th>
             </tr>
           </thead>
           <tbody id="lista"></tbody>
@@ -91,12 +91,12 @@
     let idadeEdicao = document.getElementById("idadeEdicao");
 
     let nomes = [
-      { nome: "João", idade: 40, posicao: false },
-      { nome: "Maria", idade: 55, posicao: false },
-      { nome: "Carlos", idade: 24, posicao: false },
+      { nome: "João", idade: 40, editando: false },
+      { nome: "Maria", idade: 55, editando: false },
+      { nome: "Carlos", idade: 24, editando: false },
     ]; //não pode estar vazio dentro da função, senãos sempre irá limpar
     let lista = document.getElementById("lista");
-    let posicao = false;
+    let posicao = "";
 
     function inserirNome() {
       debugger;
@@ -129,20 +129,29 @@
     }
 
     function habilitarEdicao(x) {
-      posicao = true;
-      getElementById("nomeEdicao") = nomes[x].nome;
-      getElementById("idadeEdicao") = nomes[x].idade;
-
+      posicao = x;
+      nomes[posicao].editando = true;
+      renderizarTabela();
+      document.getElementById("nomeEdicao").value = nomes[posicao].nome;
+      document.getElementById("idadeEdicao").value = nomes[posicao].idade;
     }
-    function editarPessoa() {
-      nomes[x].nome = document.getElementById("nomeEdicao");
-      nomes[x].idade = document.getElementById("idadeEdicao");
+
+    function editarPessoa(x) {
+      debugger;
+      if (nomes[posicao].nome && nomes[posicao].idade) {
+        nomes[posicao].nome = nomeEdicao;
+        nomes[posicao].idade = idadeEdicao;
+        renderizarTabela();
+      } else {
+        alert("Por favor preencha todos os campos.");
+      }
+      renderizarTabela();
     }
 
     function renderizarTabela() {
       let arr = "";
       for (let x = 0; x < nomes.length; x++) {
-        if (posicao == false) {
+        if (nomes[x].editando == false) {
           arr += `<tr>
               <td>${nomes[x].nome}</td>
               <td>${nomes[x].idade}</td>
