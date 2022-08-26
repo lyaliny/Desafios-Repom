@@ -87,8 +87,6 @@
   <script>
     let nome = document.getElementById("nome"); // executa qdo a tela carrega, inicia vazio
     let idade = document.getElementById("idade");
-    let nomeEdicao = document.getElementById("nomeEdicao");
-    let idadeEdicao = document.getElementById("idadeEdicao");
 
     let nomes = [
       { nome: "João", idade: 40, editando: false },
@@ -96,7 +94,6 @@
       { nome: "Carlos", idade: 24, editando: false },
     ]; //não pode estar vazio dentro da função, senãos sempre irá limpar
     let lista = document.getElementById("lista");
-    let posicao = "";
 
     function inserirNome() {
       debugger;
@@ -124,28 +121,28 @@
       renderizarTabela();
     }
 
-    function cancelar() {
-      return false;
+    function cancelar(x) {
+      nomes[x].editando = false;
+      renderizarTabela();
     }
 
     function habilitarEdicao(x) {
-      posicao = x;
-      nomes[posicao].editando = true;
+      nomes[x].editando = true;
       renderizarTabela();
-      document.getElementById("nomeEdicao").value = nomes[posicao].nome;
-      document.getElementById("idadeEdicao").value = nomes[posicao].idade;
     }
 
     function editarPessoa(x) {
       debugger;
-      if (nomes[posicao].nome && nomes[posicao].idade) {
-        nomes[posicao].nome = nomeEdicao;
-        nomes[posicao].idade = idadeEdicao;
+      let nomeEdicao = document.getElementById(`nomeEdicao${x}`);
+      let idadeEdicao = document.getElementById(`idadeEdicao${x}`);
+      if (nomeEdicao.value && idadeEdicao.value) {
+        nomes[x].nome = nomeEdicao.value;
+        nomes[x].idade = idadeEdicao.value;
+        nomes[x].editando = false;
         renderizarTabela();
       } else {
-        alert("Por favor preencha todos os campos.");
+        alert("digite informações validas");
       }
-      renderizarTabela();
     }
 
     function renderizarTabela() {
@@ -170,13 +167,15 @@
             class="form-control"
             placeholder="Insira o nome"
             type="text"
-            id="nomeEdicao"
+            id="nomeEdicao${x}"
+            value="${nomes[x].nome}"
           /></td>
               <td><input
             class="form-control"
             type="number"
-            id="idadeEdicao"
+            id="idadeEdicao${x}"
             placeholder="Insira sua idade"
+            value="${nomes[x].idade}"
           /></td>
               <td>
                 <button type="button" onclick="editarPessoa(${x})" class="btn btn-dark" data-bs-toggle="modal" data-bs-target="#exampleModal">

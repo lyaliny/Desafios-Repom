@@ -1,0 +1,62 @@
+.colunas {
+  display: flex;
+  gap: 10px;
+  background: #070755;
+  padding: 60px 60px 0px 60px;
+}
+
+.text {
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  font-weight: 300;
+  font-size: 50px;
+  line-height: 55px; /*controla altura da linha*/
+}
+b {
+  font-weight: 700;
+}
+.text-p {
+  font-family: "Montserrat", sans-serif;
+  color: white;
+  font-weight: 900;
+  font-size: 50px;
+}
+
+.text-pp {
+  font-family: "Montserrat", sans-serif;
+  color: rgb(157, 203, 231);
+  font-size: 18px;
+}
+.imagem {
+  border-radius: 300px 300px 0px 0px;
+}
+.botao {
+  border-radius: 30px;
+  font-size: 12px;
+}
+.icone {
+  background: #070755;
+  padding: 10px;
+  width: 50px;
+}
+
+.aviao {
+  border-radius: 10px 0px 0px 0px;
+}
+
+.carta {
+  border-radius: 0px 0px 0px 10px;
+}
+
+.icones {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  right: 0px;
+  top: calc(50% - 80px);
+  gap: 5px;
+}
+.image-coluna {
+  display: flex;
+  align-items: flex-end;
+}

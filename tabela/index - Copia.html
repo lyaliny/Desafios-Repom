@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <title>Tabela</title>
+  </head>
+  <body>
+    <div class="container py-4 text-center">
+      <div class="row">
+        <div class="col-sm-6 col-md-2 mb-2">
+          <select id="selecao" class="form-select">
+            <option selected>Selecione o tipo de endereço:</option>
+            <option value="1">Principal</option>
+            <option value="2">Cobrança</option>
+          </select>
+        </div>
+        <div class="col-sm-6 col-md-8 mb-2">
+          <input
+            id="logradouro"
+            class="form-control"
+            placeholder="Logradouro"
+          />
+        </div>
+        <div class="col-sm-6 col-md-2 mb-2">
+          <input id="numero" class="form-control" placeholder="Número" />
+        </div>
+        <div class="col-sm-6 col-md-4 mb-2">
+          <input id="cidade" class="form-control" placeholder="Cidade" />
+        </div>
+        <div class="col-sm-6 col-md-4 mb-2">
+          <input id="uf" class="form-control" placeholder="Estado" />
+        </div>
+        <div class="col-sm-6 col-md-4 mb-2 d-grid">
+          <button
+            type="button"
+            class="btn btn-outline-secondary"
+            onclick="inserirDados()"
+          >
+            Inserir
+          </button>
+        </div>
+      </div>
+
+      <div class="fs-4 mt-3" id="mostrar"></div>
+      <div class="table-responsive">
+        <table class="table mt-3 table-bordered table align-middle">
+          <thead>
+            <tr class="align-bottom">
+              <th>Tipo</th>
+              <th>Lagradouro</th>
+              <th>Número</th>
+              <th>Cidade</th>
+              <th>Estado</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="corpoTabela"></tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+  <script>
+    const usuario = {
+      nome: "Bruno Eduardo",
+      enderecos: [
+        {
+          tipo: 1,
+          logradouro: "av. paulista",
+          numero: 1200,
+          uf: "SP",
+          cidade: "São Paulo",
+          edit: false,
+        },
+        {
+          tipo: 2,
+          logradouro: "av. sapopemba",
+          numero: 9000,
+          uf: "SP",
+          cidade: "São Paulo",
+          edit: false,
+        },
+      ],
+    };
+
+    function tabela() {
+      debugger;
+      let lista = "";
+      for (let x = 0; x < usuario.enderecos.length; x++) {
+        if (usuario.enderecos[x].edit == false) {
+          lista += `<tr>
+              <td>${
+                usuario.enderecos[x].tipo == 1 ? "Principal" : "Cobrança"
+              }</td>
+              <td>${usuario.enderecos[x].logradouro}</td>
+              <td>${usuario.enderecos[x].numero}</td>
+              <td>${usuario.enderecos[x].cidade}</td>
+              <td>${usuario.enderecos[x].uf}</td>
+              <td>
+                <button class="btn btn-danger" type="button" onclick="excluir(${x})">
+                Excluir
+                </button>
+                <button type="button" class="btn btn-primary" onclick="carregarDados(${x})">
+                  Editar
+                </button>
+              </td>
+            </tr>`;
+        } else {
+          lista += `<tr>
+            <td><select id="tipoEdicao${x}" class="form-select" >
+              <option value="">Selecione o tipo de endereço:</option>
+              <option value="1" ${
+                usuario.enderecos[x].tipo == 1 ? "selected" : ""
+              }>Principal</option>
+              <option value="2" ${
+                usuario.enderecos[x].tipo == 2 ? "selected" : ""
+              }>Cobrança</option>
+              </select>
+            </td>
+              <td><input
+            id="logradouroEdicao${x}" value="${usuario.enderecos[x].logradouro}"
+            class="form-control"
+            placeholder="Logradouro"/></td>
+              <td><input id="numeroEdicao${x}" value="${
+            usuario.enderecos[x].numero
+          }" class="form-control" placeholder="Número" /></td>
+              <td> <input id="cidadeEdicao${x}" value="${
+            usuario.enderecos[x].cidade
+          }" class="form-control" placeholder="Cidade" /></td>
+              <td><input id="ufEdicao${x}" value="${
+            usuario.enderecos[x].uf
+          }" class="form-control" placeholder="Estado" /></td>
+              <td>
+                <button class="btn btn-danger" type="button" onclick="salvar(${x})">
+                Salvar
+                </button>
+                <button type="button" class="btn btn-primary" onclick="cancelar(${x})">
+                  Cancelar
+                </button>
+              </td>
+            </tr>`;
+        }
+      }
+
+      document.getElementById("corpoTabela").innerHTML = lista;
+    }
+
+    function inserirDados() {
+      if (
+        selecao.value &&
+        logradouro.value &&
+        numero.value &&
+        cidade.value &&
+        uf.value
+      ) {
+        let endereco = {
+          tipo: selecao.value,
+          logradouro: logradouro.value,
+          numero: numero.value,
+          cidade: cidade.value,
+          uf: uf.value,
+          edit: false,
+        };
+        usuario.enderecos.push(endereco);
+        tabela();
+        limparInputs();
+      } else {
+        alert("digite informações validas");
+      }
+    }
+
+    function limparInputs() {
+      document.getElementById("selecao").value = "";
+      document.getElementById("logradouro").value = "";
+      document.getElementById("numero").value = "";
+      document.getElementById("cidade").value = "";
+      document.getElementById("uf").value = "";
+    }
+
+    function excluir(x) {
+      usuario.enderecos.splice(x, 1);
+      tabela();
+    }
+
+    function carregarDados(x) {
+      usuario.enderecos[x].edit = true;
+      tabela();
+    }
+
+    function salvar(x) {
+      debugger;
+      let tipoEdicao = document.getElementById(`tipoEdicao${x}`);
+      let logradouroEdicao = document.getElementById(`logradouroEdicao${x}`);
+      let numeroEdicao = document.getElementById(`numeroEdicao${x}`);
+      let cidadeEdicao = document.getElementById(`cidadeEdicao${x}`);
+      let ufEdicao = document.getElementById(`ufEdicao${x}`);
+      if (
+        tipoEdicao.value &&
+        logradouroEdicao.value &&
+        numeroEdicao.value &&
+        cidadeEdicao.value &&
+        ufEdicao
+      ) {
+        usuario.enderecos[x].tipo = tipoEdicao.value;
+        usuario.enderecos[x].logradouro = logradouroEdicao.value;
+        usuario.enderecos[x].numero = numeroEdicao.value;
+        usuario.enderecos[x].cidade = cidadeEdicao.value;
+        usuario.enderecos[x].uf = ufEdicao.value;
+        usuario.enderecos[x].edit = false;
+        tabela();
+      } else {
+        alert("Favor informe todos os campos.");
+      }
+    }
+
+    function cancelar(x) {
+      usuario.enderecos[x].edit = false;
+      tabela();
+    }
+
+    function init() {
+      document.getElementById("mostrar").innerHTML = `Nome: ${usuario.nome}`;
+      tabela();
+    }
+    init();
+  </script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"
+  ></script>
+</html>
