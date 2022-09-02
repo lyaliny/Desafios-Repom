@@ -19,42 +19,53 @@
   </head>
   <body>
     <div class="container background mt-5">
-      <div class="row colunas">
-        <div class="col-sm-6 col-md-2 mt-4 mb-4">
+      <div class="row colunas" id="colunas">
+        <!-- <div class="col-sm-6 col-md-2 mt-4 mb-4">
           <div class="text fs-5 fw-bold">
             + de 29 anos
             <p class="text-p mt-3">de experiencia</p>
           </div>
-        </div>
-        <div class="col-sm-6 col-md-2 mt-4 mb-4">
-          <div class="text fs-5">
-            + de 3 mil
-            <p class="text-p mt-3 fw-light">clientes em 15 segmentos</p>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-2 mt-4 mb-4">
-          <div class="text fs-5">
-            + de 1,7 mil
-            <p class="text-p mt-3 fw-light">postos credenciados</p>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-2 mt-4 mb-4">
-          <div class="text fs-5">
-            + de 1 milhão
-            <p class="text-p mt-3 fw-light">
-              de caminhoneiros recebendo frete e vale-pedágio
-            </p>
-          </div>
-        </div>
-        <div class="col-sm-6 col-md-2 mt-4 mb-4">
-          <div class="text fs-5">
-            + de 8 milhões
-            <p class="text-p mt-3 fw-light">de transações por ano</p>
-          </div>
-        </div>
+        </div> -->
       </div>
     </div>
   </body>
+  <script>
+    const frases = [
+      { ativo: true, titulo: "+ de 29 anos", descricao: "de experiencia" },
+      {
+        ativo: true,
+        titulo: "+ de 3 mil",
+        descricao: "clientes em 15 segmentos",
+      },
+      { ativo: true, titulo: "+ de 1,7 mil", descricao: "postos credenciados" },
+      {
+        ativo: true,
+        titulo: "+ de 1 milhão",
+        descricao: "de caminhoneiros recebendo frete e vale-pedágio",
+      },
+      {
+        ativo: false,
+        titulo: "+ de 8 milhões",
+        descricao: "de transações por ano",
+      },
+    ];
+
+    function montarTexto() {
+      let lista = "";
+      for (let x = 0; x < frases.length; x++) {
+        if (frases[x].ativo) {
+          lista += `<div class="col-sm-6 col-md-2 mt-4 mb-4">
+          <div class="text fs-5 fw-bold">
+            ${frases[x].titulo}
+            <p class="text-p mt-3">${frases[x].descricao}</p>
+          </div>
+        </div>`;
+        }
+      }
+      document.getElementById("colunas").innerHTML = lista;
+    }
+    montarTexto();
+  </script>
   <script
     src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
     integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
