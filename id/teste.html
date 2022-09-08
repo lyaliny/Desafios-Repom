@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="listaUsuarios"></div>
+    <script>
+      let users = [
+        { id: 1, nome: "Bruno", perfil: { id: 10, descricao: "admin" } },
+        {
+          id: 2,
+          nome: "Eduardo",
+          perfil: { id: 12, descricao: "visualizador" },
+        },
+        {
+          id: 3,
+          nome: "Thiago",
+          perfil: { id: 12, descricao: "visualizador" },
+        },
+      ];
+      let permissoes = [
+        { id: 10, descricao: "admin" },
+        { id: 12, descricao: "visualizador" },
+      ];
+
+      const params = new URLSearchParams(window.location.search);
+
+      function carregamentoTela() {
+        let usuarios = "";
+        let usuarioInvalido = true;
+        for (let x = 0; x < users.length; x++) {
+          if (params.get("id") == users[x].id) {
+            usuarioInvalido = false;
+            usuarios += `<div>
+                <input type="number" id="input" value="${
+                  users[x].id
+                }" placeholder="ID" />
+                <input type="text" value="${
+                  users[x].nome
+                }" placeholder="Nome" />
+                <select>
+                  ${montarListaPermissoes(users[x])}
+                </select>
+                <button type="button">Enviar</button>
+            </div>`;
+          }
+        }
+        if (usuarioInvalido) {
+          alert("Usuario invalido");
+        }
+        document.getElementById("listaUsuarios").innerHTML = usuarios;
+      }
+
+      function montarListaPermissoes(usuarioAtivo) {
+        debugger;
+        let permissao = "";
+        for (let x = 0; x < permissoes.length; x++) {
+          permissao += `<option ${
+            usuarioAtivo.perfil.id == permissoes[x].id ? "selected" : ""
+          } value="${permissoes[x].id}">${permissoes[x].descricao}</option>`;
+          // if (usuarioAtivo.perfil.id == permissoes[x].id) {
+          //   permissao += `<option selected value="${permissoes[x].id}">${permissoes[x].descricao}</option>`;
+          // } else {
+          //   permissao += `<option value="${permissoes[x].id}">${permissoes[x].descricao}</option>`;
+          // }
+        }
+        console.log(usuarioAtivo);
+        return permissao;
+      }
+
+      carregamentoTela();
+
+      //console.log("location", window.location);
+      //console.log("search", window.location.search);
+      console.log("params.get", params.get("id"));
+    </script>
+  </body>
+</html>
