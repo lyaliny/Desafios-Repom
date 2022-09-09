@@ -29,10 +29,9 @@
             Buscar
           </button>
         </div>
-        <div class="col-sm-12 col-md-12 mt-3">
-          <div id="campo-endereco"></div>
-        </div>
       </div>
+
+      <div class="row" id="campo-endereco"></div>
     </div>
   </body>
   <script>
@@ -51,13 +50,13 @@
         .then((resposta) => resposta.json())
         .then((success) => {
           console.log("enderço", success);
-          document.getElementById("campo-endereco").innerHTML = `<div>
-                        <input placeholder="cep" value="${success.cep}" />
-                        <input placeholder="logradouro" value="${success.logradouro}" />
-                        <input placeholder="bairro" value="${success.bairro}" />
-                        <input placeholder="cidade" value="${success.localidade}" />
-                        <input placeholder="estado" value="${success.uf}" />
-                      </div>`;
+          document.getElementById("campo-endereco").innerHTML = `
+                        <div class="col-sm-4 mt-2"><input class="form-control"  placeholder="cep" value="${success.cep}" /></div>
+                        <div class="col-sm-8 mt-2"><input class="form-control"  placeholder="logradouro" value="${success.logradouro}" /></div>
+                        <div class="col-sm-4 mt-2"><input class="form-control"  placeholder="bairro" value="${success.bairro}" /></div>
+                        <div class="col-sm-4 mt-2"><input class="form-control"  placeholder="cidade" value="${success.localidade}" /></div>
+                        <div class="col-sm-4 mt-2"><input class="form-control"  placeholder="estado" value="${success.uf}" /></div>
+                      `;
         })
         .catch((error) => {
           console.log("error", error);
