@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Editar</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container mt-4">
+      <div class="table-responsive">
+        <table class="table mt-3 table-bordered table align-middle">
+          <thead>
+            <tr class="align-bottom">
+              <th>Nome</th>
+              <th>Username</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="mostrarDadosId"></tbody>
+        </table>
+      </div>
+    </div>
+  </body>
+  <script>
+    const edit = new URLSearchParams(window.location.search);
+    function carregaEdicao() {
+      debugger;
+      let usuarios = "";
+      fetch(
+        `https://631b23d6fae3df4dcff5e7f9.mockapi.io/baseApi/users/${edit.get(
+          "id"
+        )}`
+      )
+        .then((resposta) => resposta.json())
+        .then((success) => {
+          usuarios = `<tr>
+                <td><input class="form-control" type="text" id="input" value="${success.name}" /></td>
+                <td><input class="form-control" type="text" value="${success.username}" /></td>
+                <td><a class="btn btn-primary" href="./index.html">Voltar</a>
+                  <button class="btn btn-primary" >Salvar</button></td>
+            </tr>`;
+          document.getElementById("mostrarDadosId").innerHTML = usuarios;
+        })
+        .catch((error) => {
+          console.log("error", error);
+        });
+    }
+    carregaEdicao();
+  </script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"
+  ></script>
+</html>
