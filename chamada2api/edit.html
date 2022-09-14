@@ -14,17 +14,13 @@
   </head>
   <body>
     <div class="container mt-4">
-      <div class="table-responsive">
-        <table class="table mt-3 table-bordered table align-middle">
-          <thead>
-            <tr class="align-bottom">
-              <th>Nome</th>
-              <th>Username</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody id="mostrarDadosId"></tbody>
-        </table>
+      <div class="row">
+        <div class="col">
+          <div class="align-bottom">
+            <h2>Editar dados:</h2>
+          </div>
+          <div id="mostrarDadosId"></div>
+        </div>
       </div>
     </div>
   </body>
@@ -40,12 +36,18 @@
       )
         .then((resposta) => resposta.json())
         .then((success) => {
-          usuarios = `<tr>
-                <td><input class="form-control" type="text" id="input" value="${success.name}" /></td>
-                <td><input class="form-control" type="text" value="${success.username}" /></td>
-                <td><a class="btn btn-primary" href="./index.html">Voltar</a>
-                  <button class="btn btn-primary" >Salvar</button></td>
-            </tr>`;
+          usuarios = `<div>
+                <label class="form-label mt-2">Nome</label>
+                <div><input class="form-control" type="text" id="input" value="${success.name}" /></div>
+                <label class="form-label mt-2">Username</label>
+                <div><input class="form-control" type="text" value="${success.username}" /></div>
+                <label class="form-label mt-2">Cidade</label>
+                <div><input class="form-control" type="text" value="${success.endereco.cidade}" /></div>
+                <label class="form-label mt-2">Telefone</label>
+                <div><input class="form-control" type="text" value="${success.telefone}" /></div>
+                <div><a class="btn btn-primary mt-3" href="./index.html">Voltar</a>
+                  <button class="btn btn-primary mt-3" >Salvar</button></div>
+            </div>`;
           document.getElementById("mostrarDadosId").innerHTML = usuarios;
         })
         .catch((error) => {

@@ -14,13 +14,16 @@
   </head>
   <body>
     <div class="container mt-4">
-      <div class="table-responsive">
+      <div class="row">
         <table class="table mt-3 table-bordered table align-middle">
           <thead>
             <tr class="align-bottom">
+              <th>ID</th>
               <th>Data de Criação</th>
               <th>Usarname</th>
               <th>Nome Completo</th>
+              <th>Cidade</th>
+              <th>Telefone</th>
               <th>Ações</th>
             </tr>
           </thead>
@@ -50,13 +53,19 @@
           </div>
 
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Sim, excluir</button>
+            <button
+              type="button"
+              onclick="excluirUsuario()"
+              class="btn btn-primary"
+            >
+              Sim, excluir
+            </button>
             <button
               type="button"
               class="btn btn-secondary"
               data-bs-dismiss="modal"
             >
-              Sair
+              Não! Fechar.
             </button>
           </div>
         </div>
@@ -65,6 +74,7 @@
   </body>
   <script>
     let lista = "";
+    let id = "";
 
     function formatarData(data) {
       return `${data.slice(8, 10)}/${data.slice(5, 7)}/${data.slice(0, 4)}`;
@@ -74,14 +84,20 @@
       fetch(`https://631b23d6fae3df4dcff5e7f9.mockapi.io/baseApi/users`)
         .then((resposta) => resposta.json())
         .then((success) => {
+          lista = "";
           for (let x = 0; x < success.length; x++) {
             lista += `<tr>
+              <td>${success[x].id}</td>
               <td>${formatarData(success[x].createdAt)}</td> 
               <td>${success[x].username}</td>
               <td>${success[x].name}</td>
+              <td>${success[x].endereco.cidade}</td>
+              <td>${success[x].telefone}</td>
              
               <td>
-                <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button" onclick="excluir(${x})">
+                <button onclick="modalExcluir(${
+                  success[x].id
+                })" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal" type="button">
                 Excluir
                 </button>
                 <a type="button" class="btn btn-primary" href="./edit.html?id=${
@@ -98,6 +114,24 @@
           console.log("error", error);
         });
     }
+
+    function modalExcluir(idSelecionado) {
+      id = idSelecionado;
+    }
+
+    function excluirUsuario() {
+      fetch(`https://631b23d6fae3df4dcff5e7f9.mockapi.io/baseApi/users/${id}`, {
+        method: "DELETE",
+      })
+        .then((resposta) => resposta.json())
+        .then((success) => {
+          mostraTabelaApi();
+        })
+        .catch((error) => {
+          console.log("error", error);
+        });
+    }
+
     mostraTabelaApi();
   </script>
   <script
