@@ -24,27 +24,36 @@
 
       function somaItens(listaIdades) {
         let soma = 10;
-        for (let x = 0; x < listaIdades.length; x++) {
-          listaIdades[x] += soma;
-        }
-        return listaIdades.join(", ");
+        let lista = listaIdades.map((idade) => {
+          idade += soma;
+          return idade;
+        });
+        return lista.join(", ");
       }
-
       document.getElementById("idadesPlus").innerHTML = somaItens([...idades]);
 
-      function menorIdade(listaIdades) {
-        let menor = [];
-        for (let x = 0; x < listaIdades.length; x++) {
-          if (listaIdades[x] < 40) {
-            menor.push(listaIdades[x]);
-          }
-        }
-        return menor.join(", ");
-      }
+      // for (let x = 0; x < listaIdades.length; x++) {
+      //   listaIdades[x] += soma;
+      // }
+      //return listaIdades.join(", ");
 
+      function menorIdade(listaIdades) {
+        debugger;
+        let anos = listaIdades.filter((item) => {
+          if (item < 40) {
+            return item;
+          }
+        });
+        return anos.join(", ");
+      }
       document.getElementById("idadesMenor40").innerHTML = menorIdade([
         ...idades,
       ]);
+      // for (let x = 0; x < listaIdades.length; x++) {
+      //   if (listaIdades[x] < 40) {
+      //     menor.push(listaIdades[x]);
+      //   }
+      // }
     </script>
   </body>
 </html>
