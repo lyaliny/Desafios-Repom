@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="PT-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Empresas</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;700;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+  </head>
+  <body>
+    <div class="container mt-5">
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <div class="row" id="informacoes"></div>
+        </div>
+        <div class="col-sm-12 col-md-6 imagem-mulher">
+          <img class="img-mulher img-fluid" src="./img/Mulher.png" />
+        </div>
+      </div>
+    </div>
+  </body>
+  <script>
+    const empresas = [
+      {
+        imagem: "./img/pc.png",
+        texto: "Gestão de despesas",
+      },
+      {
+        imagem: "./img/economia.png",
+        texto: "Economia com encargos fiscais",
+      },
+      {
+        imagem: "./img/bem-estar.png",
+        texto: "Bem-estar",
+      },
+      {
+        imagem: "./img/divida.png",
+        texto: "Redução de custos",
+      },
+      {
+        imagem: "./img/grafico.png",
+        texto: "Produtividade",
+      },
+      {
+        imagem: "./img/abisenteismo.png",
+        texto: "Motivação de equipes<",
+      },
+      {
+        imagem: "./img/equipes.png",
+        texto: "Redução de absenteísmo",
+      },
+    ];
+
+    function montaIcones() {
+      let icones = `<div class="col-md-12">
+                  <p class="titulo">Empresas</p>
+                </div> `;
+
+      empresas.forEach((item) => {
+        icones += `
+                <div class="col-sm-6 img-group">
+                  <img src=${item.imagem} />
+                  <p class="texto">${item.texto}</p>
+                </div>
+              `;
+      });
+      document.getElementById("informacoes").innerHTML = icones;
+    }
+
+    montaIcones();
+  </script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+    crossorigin="anonymous"
+  ></script>
+</html>

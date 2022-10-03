@@ -1,0 +1,53 @@
+body {
+  background: rgb(227, 226, 234);
+}
+
+.colunas {
+  border-radius: 10px;
+  box-shadow: 1px 0px 10px 0px #10101061;
+  padding: 20px;
+  background-color: white;
+  min-height: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+.colunas-container {
+  display: flex;
+  align-items: stretch;
+}
+
+p {
+  font-family: "Assistant", sans-serif;
+}
+
+.link {
+  display: flex;
+  gap: 10px;
+  font-family: "Assistant", sans-serif;
+  font-size: small;
+}
+.ticket {
+  display: flex;
+  justify-content: flex-start;
+}
+.repom {
+  display: flex;
+  justify-content: flex-start;
+}
+.botao {
+  border: none;
+  padding: 4px 20px;
+  background-color: rgba(6, 6, 97, 0.862);
+  border-radius: 12px 0px 0px 12px;
+  color: white;
+  font-size: small;
+}
+.baixo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-right: -20px;
+}
+.text {
+}
