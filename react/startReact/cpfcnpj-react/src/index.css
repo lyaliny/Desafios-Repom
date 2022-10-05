@@ -1,0 +1,8 @@
+label {
+  min-height: 26px;
+}
+
+.bottom-aling {
+  align-items: flex-end;
+  display: flex;
+}
