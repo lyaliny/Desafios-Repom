@@ -1,25 +1,35 @@
 import { useState } from "react";
 
 function App() {
+  const [tipoDocumento, setTipoDocumento] = useState("cpf");
   const [documento, setDocumento] = useState("");
   const [senha, setSenha] = useState("");
+  const [tipoSenha, setTipoSenha] = useState("password");
+  const [mensagem, setMensagem] = useState("");
+  const [validForm, setValidForm] = useState(false);
 
-  function mudarSelecao(e) {
-    if (e === "cnpj") {
-      console.log(e);
-      setDocumento((documento.placeholder = "Digite seu CNPJ"));
-    } else if (e === "cpf") {
-      setDocumento((documento.placeholder = "Digite seu CPF"));
+  function exibirSenha() {
+    if (tipoSenha === "password") {
+      setTipoSenha("text");
+    } else {
+      setTipoSenha("password");
     }
   }
 
-  function exibirSenha() {
-    console.log(senha);
-    if (senha.type === "password") {
-      setSenha.type = "text";
+  function enviar() {
+    if (documento && senha) {
+      setMensagem("enviado com sucesso");
+      setValidForm(true);
     } else {
-      setSenha.type = "password";
+      setMensagem("informações inválidas");
+      setValidForm(false);
     }
+    limpar();
+  }
+
+  function limpar() {
+    setDocumento("");
+    setSenha("");
   }
 
   return (
@@ -31,8 +41,8 @@ function App() {
             <select
               className="form-select"
               id="valueSelect"
-              value={documento}
-              onChange={(e) => setDocumento(e.target.value)}
+              value={tipoDocumento}
+              onChange={(e) => setTipoDocumento(e.target.value)}
             >
               <option value="cpf">CPF</option>
               <option value="cnpj">CNPJ</option>
@@ -44,7 +54,7 @@ function App() {
               id="documento"
               value={documento}
               onChange={(e) => setDocumento(e.target.value)}
-              placeholder="Digite seu CPF"
+              placeholder={`Digite seu ${tipoDocumento.toUpperCase()}`}
             />
           </div>
         </div>
@@ -52,7 +62,7 @@ function App() {
           <div className="col col-12 text-center">
             <input
               className="form-control mt-2"
-              type="password"
+              type={tipoSenha}
               id="senha"
               value={senha}
               onChange={(e) => setSenha(e.target.value)}
@@ -62,19 +72,30 @@ function App() {
           <div className="col col-12 text-center">
             <button
               type="button"
-              className="btn btn-success mt-2"
+              className="btn btn-success m-2"
               id="mostrarSenha"
-              value={senha}
-              onChange={(e) => setSenha(e.target.value)}
               onClick={exibirSenha}
             >
               Mostrar Senha
             </button>
 
-            <button className="btn btn-success mt-2 " type="submit" id="enviar">
+            <button
+              className="btn btn-success m-2 "
+              onClick={enviar}
+              id="enviar"
+            >
               Enviar
             </button>
-            <div className="mt-2" id="msg"></div>
+            {mensagem && (
+              <div
+                className={`mt-2 alert ${
+                  validForm ? "alert-success" : "alert-warning"
+                } `}
+                id="msg"
+              >
+                {mensagem}
+              </div>
+            )}
           </div>
         </div>
       </div>
