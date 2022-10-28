@@ -1,0 +1,112 @@
+.caixa-login {
+  background-color: rgb(12, 71, 88);
+  min-height: 100vh;
+}
+
+.tela {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  font-family: "Source Sans Pro", sans-serif;
+  color: aliceblue;
+
+  max-width: 300px;
+  margin: auto;
+  padding: 30px;
+
+  text-align: center;
+}
+
+.imagem {
+  width: 200px;
+  margin-top: 2rem;
+}
+
+input {
+  background-color: white;
+
+  border: none;
+  border-radius: 2px;
+
+  padding: 0.2rem 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.2rem;
+  width: 100%;
+  height: 40px;
+}
+
+input[type="checkbox"] {
+  width: unset;
+  height: unset;
+}
+
+button {
+  background-color: rgb(250, 184, 140);
+
+  border: none;
+  border-radius: 2px;
+  box-shadow: none;
+  margin-top: 16px;
+
+  color: white;
+  padding: 10px;
+  width: 100%;
+  height: 40px;
+}
+
+button:hover {
+  background-color: rgb(247, 198, 166);
+}
+
+.esqueci {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  text-align: center;
+}
+
+a {
+  color: rgb(162 162 223);
+  font-family: "Open Sans";
+  text-decoration: none;
+  font-size: 12px;
+}
+
+label {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 14px;
+  text-align: left;
+}
+
+.lembrar {
+  font-size: 12px;
+}
+
+.error {
+  color: rgb(210, 72, 72);
+  font-weight: bold;
+  font-size: 20px;
+}
+
+input.error {
+  border: 1px red solid;
+}
+
+.alertaSucesso {
+  color: rgb(23, 231, 109);
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.texto {
+  text-align: center;
+  font-size: 12px;
+  margin: 10px;
+}
+.selecao {
+  background-color: white;
+  width: 100%;
+  border-radius: 2px;
+  padding: 10px;
+  font-size: 13px;
+}
