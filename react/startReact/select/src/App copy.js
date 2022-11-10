@@ -3,7 +3,7 @@ import "./App.css";
 
 function App() {
   const [selecao, setSelecao] = useState("");
-  const [estados, setEstados] = useState([
+  const [estados] = useState([
     { sigla: "AC", descricao: "Acre" },
     { sigla: "AL", descricao: "Alagoas" },
     { sigla: "AP", descricao: "Amapá" },
