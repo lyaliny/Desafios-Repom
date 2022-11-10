@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bloquear Caracter</title>
+  </head>
+  <body>
+    <form action="">
+      <label>Repom</label>
+      <input id="campoTexto" type="text" />
+    </form>
+  </body>
+  <script>
+    let campoTexto = document.getElementById("campoTexto");
+
+    campoTexto.addEventListener("keyup", function (e) {
+      debugger;
+
+      e.target.value = removerCaracter(e.target.value);
+
+      console.log(e.target.value);
+    });
+
+    function removerCaracter(texto) {
+      return texto.replace(/[.,-;]/g, "").replace(/\s+/g, " "); //remove espaços
+    }
+  </script>
+</html>
