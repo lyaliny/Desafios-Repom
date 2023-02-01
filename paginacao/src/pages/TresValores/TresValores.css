@@ -1,0 +1,9 @@
+.caixa-exibir {
+  display: flex;
+  color: black;
+}
+
+.botoes {
+  display: flex;
+  gap: 10px;
+}

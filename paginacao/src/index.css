@@ -1,0 +1,13 @@
+#root {
+  display: flex;
+}
+
+.conteudo {
+  padding: 25px;
+}
+
+@media (max-width: 742px) {
+  #root {
+    flex-direction: column;
+  }
+}
